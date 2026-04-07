@@ -1,11 +1,13 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -pthread
+CFLAGS = -Wall -Wextra
 
-TARGET = main
-SRC = main.c
+all: server_threaded server_epoll
 
-$(TARGET): $(SRC)
-	$(CC) $(CFLAGS) -o $(TARGET) $(SRC)
+server_threaded: server_threaded.c
+	$(CC) $(CFLAGS) -pthread -o server_threaded server_threaded.c
+
+server_epoll: server_epoll.c
+	$(CC) $(CFLAGS) -o server_epoll server_epoll.c
 
 clean:
-	rm -f $(TARGET)
+	rm -f server_threaded server_epoll main
